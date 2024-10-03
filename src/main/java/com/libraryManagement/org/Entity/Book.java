@@ -1,15 +1,14 @@
 package com.libraryManagement.org.Entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "books")
 public class Book {
 
-    @Id
-    private String id;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private String author;
 
@@ -22,11 +21,11 @@ public class Book {
     }
 
     // Getters and Setters
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
