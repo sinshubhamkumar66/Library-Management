@@ -4,6 +4,8 @@ import com.libraryManagement.org.Entity.Book;
 import com.libraryManagement.org.Exception.BookNotFoundException;
 import com.libraryManagement.org.Exception.ErrorResponse;
 import com.libraryManagement.org.Service.BookService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api/v1/book")
+@Tag(name = "Api for Book(CREATE, READ, GET, DELETE")
 public class BookController {
 
     @Autowired
@@ -29,6 +32,7 @@ public class BookController {
      * @param books List of books to be saved
      * @return Response entity containing the saved books and HTTP status
      */
+    @Operation(summary = "SAVE BOOK DETAILS")
     @PostMapping("/saveBooks")
     public ResponseEntity<?> saveBooks(@RequestBody List<Book> books) {
         try {
@@ -52,6 +56,7 @@ public class BookController {
      * @param id The ID of the book to retrieve
      * @return Response entity containing the book and HTTP status
      */
+    @Operation(summary = "Get Book By Id")
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookById(@PathVariable Long id) {
         try {
@@ -72,6 +77,7 @@ public class BookController {
      *
      * @return Response entity containing the list of books and HTTP status
      */
+    @Operation(summary = "get All Books")
     @GetMapping("/all")
     public ResponseEntity<?> getAllBooks() {
         try {
@@ -88,6 +94,7 @@ public class BookController {
      * @param id The ID of the book to delete
      * @return Response entity with HTTP status
      */
+    @Operation(summary = "Delete Book By Id")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable Long id) {
         try {
@@ -109,6 +116,7 @@ public class BookController {
      *
      * @return Response entity with HTTP status
      */
+    @Operation(summary = "Delete All book")
     @DeleteMapping("/deleteAll")
     public ResponseEntity<?> deleteAllBooks() {
         try {
