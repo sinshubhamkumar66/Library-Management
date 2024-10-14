@@ -27,6 +27,9 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public List<Book> saveBook(List<Book> book) {
+        if (book == null) {
+            throw new IllegalArgumentException("Book list cannot be null");
+        }
         return bookRepo.saveAll(book);
     }
 

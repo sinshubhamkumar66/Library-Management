@@ -38,6 +38,7 @@ public class BookController {
         try {
             if (books == null || books.isEmpty()) {
                 throw new IllegalArgumentException("Book list cannot be empty");
+
             }
             List<Book> savedBooks = bookService.saveBook(books);
             return new ResponseEntity<>(savedBooks, HttpStatus.CREATED);
