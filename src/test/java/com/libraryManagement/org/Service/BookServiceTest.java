@@ -1,4 +1,4 @@
-package Service;
+package com.libraryManagement.org.Service;
 
 import com.libraryManagement.org.Entity.Book;
 import com.libraryManagement.org.Repo.BookRepository;
