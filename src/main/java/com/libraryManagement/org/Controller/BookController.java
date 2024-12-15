@@ -3,6 +3,7 @@ package com.libraryManagement.org.Controller;
 import com.libraryManagement.org.Entity.Book;
 import com.libraryManagement.org.Exception.BookNotFoundException;
 import com.libraryManagement.org.Exception.ErrorResponse;
+import com.libraryManagement.org.Exception.GlobalExceptionHandler;
 import com.libraryManagement.org.Service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -37,15 +38,15 @@ public class BookController {
     public ResponseEntity<?> saveBooks(@RequestBody List<Book> books) {
         try {
             if (books == null || books.isEmpty()) {
-                throw new IllegalArgumentException("Book list cannot be empty");
+                throw new GlobalExceptionHandler();
 
             }
             List<Book> savedBooks = bookService.saveBook(books);
             return new ResponseEntity<>(savedBooks, HttpStatus.CREATED);
         } catch (IllegalArgumentException ex) {
             return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()), HttpStatus.BAD_REQUEST);
-        } catch (BookNotFoundException ex) {
-            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Request body is missing or invalid. Please provide valid data."), HttpStatus.BAD_REQUEST);
+        } catch (GlobalExceptionHandler ex) {
+            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception ex) {
             return new ResponseEntity<>(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An error occurred while saving books"), HttpStatus.INTERNAL_SERVER_ERROR);
         }

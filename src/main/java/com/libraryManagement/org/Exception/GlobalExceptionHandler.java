@@ -13,7 +13,12 @@ import org.springframework.web.context.request.WebRequest;
  * appropriate responses to the client.
  */
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends BookNotFoundException {
+    public static String message;
+
+    public GlobalExceptionHandler() {
+        super(message);
+    }
 
     /**
      * Handle missing or invalid request body exceptions.
